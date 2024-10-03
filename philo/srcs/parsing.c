@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:07:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/02 16:49:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/03 11:39:17 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	a_to_pos(const char *nptr)
 	return ((int) nbr);
 }
 
-int	parse_args(t_data *data, char **argv)
+int	convert_args(t_data *data, char **argv)
 {
 	data->number_of_philosophers = a_to_pos(argv[1]);
 	if (data->number_of_philosophers <= 0)
@@ -56,35 +56,14 @@ int	parse_args(t_data *data, char **argv)
 	return (0);
 }
 
-t_data	*init_data(void)
-{
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (printf("Error: init_data"), data);
-	data->death_lock = malloc(sizeof(pthread_mutex_t));
-	if (!data->death_lock)
-		return (printf("Error: init_data"), free(data), NULL);
-	data->print_lock = malloc(sizeof(pthread_mutex_t));
-	if (!data->print_lock)
-		return (printf("Error: init_data"), free(data->death_lock),
-			free(data), NULL);
-	data->has_died = 0;
-	data->time_to_die = 0;
-	data->time_to_eat = 0;
-	data->time_to_sleep = 0;
-	data->start_time.tv_sec = 0;
-	data->start_time.tv_usec = 0;
-}
-
-t_data	*prepare_data(char **argv)
+t_data	*parsing(char **argv)
 {
 	t_data	*data;
 
 	data = init_data();
 	if (!data)
 		return (NULL);
-	if (parse_args(data, argv))
-		return (clear_data(data), NULL);
+	if (convert_args(data, argv))
+		return (clear_data(&data), NULL);
+	return (data);
 }
