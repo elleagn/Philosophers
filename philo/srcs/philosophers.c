@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 09:18:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 12:06:49 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 13:45:28 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ t_philo	*init_philo(t_data *data, int nb)
 	philo->data = data;
 }
 
+void	clear_philos(t_philo **philos, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		destroy_mutex(philos[i]->right_fork);
+		destroy_mutex(philos[i]->mealtime_lock);
+		free(philos[i]);
+	}
+	free(philos);
+}
+
 t_philo	**create_philosophers(t_data *data)
 {
 	t_philo	**philo_array;
@@ -43,7 +57,7 @@ t_philo	**create_philosophers(t_data *data)
 		return (NULL);
 	while (i < data->number_of_meals)
 	{
-		philo_array[i] = init_philo(i + 1);
+		philo_array[i] = init_philo(data, i + 1);
 		if (!philo_array[i])
 			return (clear_philos(philo_array, i + 1), NULL);
 	}

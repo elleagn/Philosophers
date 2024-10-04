@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 12:02:21 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 13:48:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ typedef struct s_philo
 
 pthread_mutex_t	*init_mutex(void);
 t_data			*init_data(void);
+t_philo			**create_philosophers(t_data *data);
 
 // Cleanup
 
 void			destroy_mutex(pthread_mutex_t **mutex);
 void			clear_data(t_data **data);
+t_philo			*init_philo(t_data *data, int nb);
 
 // Parsing
 
