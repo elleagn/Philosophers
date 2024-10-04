@@ -6,14 +6,16 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/09/27 13:33:25 by gozon            ###   ########.fr        #
+#    Updated: 2024/10/04 08:58:59 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRC =
+CFLAGS = -Wall -Wextra -Werror -g
+SRC_DIR = srcs
+SRC_FILES = mutexes.c parsing.c data.c main.c
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -34,7 +36,6 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
 clean:
-	@make clean -C Libft --silent --no-print-directory
 	@rm -rf $(OBJ_DIR)
 	@echo "Nettoyage réussi ($(CHECK_MARK))"
 

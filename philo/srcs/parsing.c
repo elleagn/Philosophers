@@ -6,11 +6,18 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:07:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/03 11:39:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 08:46:27 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+void	usage(void)
+{
+	printf("Usage:\n"
+		"./philo number_of_philosophers time_to_die time_to_eat time_to_sleep"
+		" [number_of_meals]\n");
+}
 
 int	a_to_pos(const char *nptr)
 {
@@ -49,7 +56,7 @@ int	convert_args(t_data *data, char **argv)
 		return (usage(), -1);
 	if (argv[5])
 	{
-		data->number_of_meals = a_to_ms(argv[2]);
+		data->number_of_meals = a_to_pos(argv[5]);
 		if (data->number_of_meals < 0)
 			return (usage(), -1);
 	}
