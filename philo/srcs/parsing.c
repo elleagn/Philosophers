@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:07:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 08:46:27 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 09:27:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	a_to_pos(const char *nptr)
 
 int	convert_args(t_data *data, char **argv)
 {
-	data->number_of_philosophers = a_to_pos(argv[1]);
-	if (data->number_of_philosophers <= 0)
+	data->nphilo = a_to_pos(argv[1]);
+	if (data->nphilo <= 0)
 		return (usage(), -1);
 	data->time_to_die = a_to_pos(argv[2]);
 	if (data->time_to_die < 0)

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/03 14:56:42 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 12:02:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_data
 {
-	int				number_of_philosophers;
+	int				nphilo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -31,16 +31,16 @@ typedef struct s_data
 	int				has_died;
 }	t_data;
 
-typedef struct s_philosopher
+typedef struct s_philo
 {
 	int				num;
 	pthread_t		thread_id;
-	int				start_of_latest_meal;
+	struct timeval	start_of_latest_meal;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*mealtime_lock;
 	t_data			*data;
-}	t_philosopher;
+}	t_philo;
 
 // Init
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:51:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 08:55:47 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/04 09:27:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_data	*init_data(void)
 	data->death_lock = init_mutex();
 	if (!data->death_lock)
 		return (destroy_mutex(&data->print_lock), free(data), NULL);
-	data->number_of_philosophers = -1;
+	data->nphilo = -1;
 	data->time_to_die = -1;
 	data->time_to_eat = -1;
 	data->time_to_sleep = -1;
