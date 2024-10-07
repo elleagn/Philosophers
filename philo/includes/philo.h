@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 08:29:34 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/07 10:20:36 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define TAKE_FORK 0
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
@@ -64,5 +65,9 @@ void			clear_philos(t_philo **philos, int size);
 
 void			usage(void);
 t_data			*parsing(char **argv);
+
+// Actions
+
+int				print_action(int philo, t_data *data, int action, int time);
 
 #endif
