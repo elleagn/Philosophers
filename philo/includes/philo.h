@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 13:48:41 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/07 08:29:34 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
+
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
+# define DIE 4
 
 typedef struct s_data
 {
@@ -52,7 +58,7 @@ t_philo			**create_philosophers(t_data *data);
 
 void			destroy_mutex(pthread_mutex_t **mutex);
 void			clear_data(t_data **data);
-t_philo			*init_philo(t_data *data, int nb);
+void			clear_philos(t_philo **philos, int size);
 
 // Parsing
 

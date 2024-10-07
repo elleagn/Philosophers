@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 09:18:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 13:45:28 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/07 09:12:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ t_philo	*init_philo(t_data *data, int nb)
 		return (free(philo), NULL);
 	philo->mealtime_lock = init_mutex();
 	if (!philo->mealtime_lock)
-		return (destroy_mutex(philo->right_fork), free(philo), NULL);
+		return (destroy_mutex(&philo->mealtime_lock), free(philo), NULL);
 	philo->data = data;
+	return (philo);
 }
 
 void	clear_philos(t_philo **philos, int size)
@@ -39,9 +40,10 @@ void	clear_philos(t_philo **philos, int size)
 	i = 0;
 	while (i < size)
 	{
-		destroy_mutex(philos[i]->right_fork);
-		destroy_mutex(philos[i]->mealtime_lock);
+		destroy_mutex(&philos[i]->right_fork);
+		destroy_mutex(&philos[i]->mealtime_lock);
 		free(philos[i]);
+		i++;
 	}
 	free(philos);
 }
@@ -55,14 +57,15 @@ t_philo	**create_philosophers(t_data *data)
 	philo_array = malloc(data->nphilo * sizeof(t_philo *));
 	if (!philo_array)
 		return (NULL);
-	while (i < data->number_of_meals)
+	while (i < data->nphilo)
 	{
 		philo_array[i] = init_philo(data, i + 1);
 		if (!philo_array[i])
 			return (clear_philos(philo_array, i + 1), NULL);
+		i++;
 	}
 	i = 0;
-	while (data->nphilo > 1 && i < 0)
+	while (data->nphilo > 1 && i < data->nphilo)
 	{
 		philo_array[i]->left_fork
 			= philo_array[(i + 1) % data->nphilo]->right_fork;

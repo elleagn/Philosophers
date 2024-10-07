@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/10/04 08:58:59 by gozon            ###   ########.fr        #
+#    Updated: 2024/10/04 13:52:18 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR = srcs
-SRC_FILES = mutexes.c parsing.c data.c main.c
+SRC_FILES = mutexes.c parsing.c data.c philosophers.c main.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs

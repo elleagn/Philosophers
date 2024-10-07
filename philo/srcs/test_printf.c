@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_printf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 09:14:54 by gozon            ###   ########.fr       */
+/*   Created: 2024/10/07 08:34:50 by gozon             #+#    #+#             */
+/*   Updated: 2024/10/07 08:41:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	t_data	*data;
-	t_philo	**philos;
+	int	i;
 
-	if (argc != 5 && argc != 6)
-		return (usage(), 1);
-	data = parsing(argv);
-	if (!data)
-		return (1);
-	philos = create_philosophers(data);
-	printf("%p, %p\n", philos[0]->left_fork, philos[1]->right_fork);
-	clear_philos(philos, data->nphilo);
+	i = 36;
+	printf("\033[%imblbl\033[0m\n", 36);
 	return (0);
 }
