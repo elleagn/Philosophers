@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 10:20:36 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/07 13:42:30 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ t_data			*parsing(char **argv);
 // Actions
 
 int				print_action(int philo, t_data *data, int action, int time);
+int				has_someone_died(t_data *data);
 
 #endif
