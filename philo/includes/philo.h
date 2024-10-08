@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 13:42:30 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/08 08:30:04 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void			clear_philos(t_philo **philos, int size);
 void			usage(void);
 t_data			*parsing(char **argv);
 
-// Actions
+// Utils
 
 int				print_action(int philo, t_data *data, int action, int time);
 int				has_someone_died(t_data *data);
+long			time_since(struct timeval time);
 
 #endif

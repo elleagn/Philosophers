@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 11:53:05 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/08 08:43:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ int	print_action(int philo_nb, t_data *data, int action, int timestamp)
 	if (has_someone_died(data))
 		return (1);
 	return (0);
+}
+
+long	time_since(struct timeval time)
+{
+	long			interval;
+	struct timeval	now;
+
+	if (gettimeofday(&now, NULL))
+		return (printf("Error getting current time\n"), -1);
+	interval = 1000 * (long)(now.tv_sec - time.tv_sec)
+		+ (long)(now.tv_usec - time.tv_usec) / 1000;
+	return (interval);
 }
