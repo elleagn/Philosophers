@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/08 08:43:51 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/09 10:04:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,26 @@ long	time_since(struct timeval time)
 	interval = 1000 * (long)(now.tv_sec - time.tv_sec)
 		+ (long)(now.tv_usec - time.tv_usec) / 1000;
 	return (interval);
+}
+
+void	full_cleanup(t_data	**data, t_philo **philos)
+{
+	clear_philos(philos, (*data)->nphilo);
+	clear_data(data);
+}
+
+int	msleep(int time, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < time)
+	{
+		if (usleep(1000))
+			return (1);
+		if (has_someone_died(data))
+			return (1);
+		i++;
+	}
+	return (0);
 }

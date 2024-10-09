@@ -5,47 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 13:45:53 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/08 08:44:55 by gozon            ###   ########.fr       */
+/*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
+/*   Updated: 2024/10/09 10:18:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	choose_fork_order(pthread_mutex_t **fork1, pthread_mutex_t **fork2,
-t_philo *philo)
+long	update_mealtime(t_philo *philo, struct timeval start)
 {
-	if (philo->num / 2)
-	{
-		*fork1 = philo->right_fork;
-		*fork2 = philo->left_fork;
-	}
-	else
-	{
-		fork1 = philo->left_fork;
-		fork2 = philo->right_fork;
-	}
+	long	tstamp;
+
+	if (pthread_mutex_lock(philo->mealtime_lock))
+		return (-1);
+	if (gettimeofday(&philo->start_of_latest_meal, NULL))
+		return (pthread_mutex_unlock(philo->mealtime_lock), -1);
+	pthread_mutex_unlock(philo->mealtime_lock);
+	tstamp = (long)((philo->start_of_latest_meal.tv_sec - start.tv_sec) * 1000
+			+ (philo->start_of_latest_meal.tv_usec - start.tv_usec) / 1000);
+	return (tstamp);
 }
 
-int	take_forks(t_philo *philo, t_data *data)
+int	eat(t_philo *philo, t_data *data)
 {
-	pthread_mutex_t	*fork1;
-	pthread_mutex_t	*fork2;
-	int				tstamp;
+	int	tstamp;
 
-	choose_fork_order(&fork1, &fork2, philo);
-	if (pthread_mutex_lock(fork1))
-		return (printf("Error locking mutex\n"), -1);
+	if (take_forks(philo, data))
+		return (1);
+	tstamp = update_mealtime(philo, data->start_time);
+	if (tstamp < 0 || print_action(philo->num, data, EAT, tstamp)
+		|| msleep(data->time_to_eat, data))
+		return (put_forks_down(philo), 1);
+	put_forks_down(philo);
+	return (0);
+}
+
+int	sleep(int nphilo, t_data *data)
+{
+	long	tstamp;
+
 	tstamp = time_since(data->start_time);
-	if (tstamp < 0 || has_someone_died(data)
-		|| print_action(philo->num, data, TAKE_FORK, tstamp))
-		return (pthread_mutex_unlock(fork1), -1);
-	if (pthread_mutex_lock(fork2))
-		return (printf("Error locking mutex\n"),
-			pthread_mutex_unlock(fork1), -1);
+	if (tstamp < 0 || print_action(nphilo, data, SLEEP, tstamp))
+		return (1);
+	if (msleep(data->time_to_sleep, data))
+		return (1);
+	return (0);
+}
+
+int	think(int nphilo, t_data *data)
+{
+	long	tstamp;
+
 	tstamp = time_since(data->start_time);
-	if (tstamp < 0 || has_someone_died(data)
-		|| print_action(philo->num, data, TAKE_FORK, tstamp))
-		return (pthread_mutex_unlock(fork1), pthread_mutex_unlock(fork2), -1);
+	if (tstamp < 0 || print_action(nphilo, data, THINK, tstamp))
+		return (1);
 	return (0);
 }

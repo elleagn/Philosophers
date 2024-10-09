@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/08 08:30:04 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/09 10:16:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_philo			**create_philosophers(t_data *data);
 void			destroy_mutex(pthread_mutex_t **mutex);
 void			clear_data(t_data **data);
 void			clear_philos(t_philo **philos, int size);
+void			full_cleanup(t_data	**data, t_philo **philos);
 
 // Parsing
 
@@ -71,5 +72,11 @@ t_data			*parsing(char **argv);
 int				print_action(int philo, t_data *data, int action, int time);
 int				has_someone_died(t_data *data);
 long			time_since(struct timeval time);
+int				msleep(int time, t_data *data);
+
+// Eating
+
+void			put_forks_down(t_philo	*philo);
+int				take_forks(t_philo *philo, t_data *data);
 
 #endif
