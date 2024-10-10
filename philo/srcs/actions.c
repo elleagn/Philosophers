@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/09 11:32:47 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 13:56:12 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ long	update_mealtime(t_philo *philo, struct timeval start)
 		return (-1);
 	if (gettimeofday(&philo->start_of_latest_meal, NULL))
 		return (pthread_mutex_unlock(philo->mealtime_lock), -1);
-	pthread_mutex_unlock(philo->mealtime_lock);
 	tstamp = (long)((philo->start_of_latest_meal.tv_sec - start.tv_sec) * 1000
 			+ (philo->start_of_latest_meal.tv_usec - start.tv_usec) / 1000);
+	pthread_mutex_unlock(philo->mealtime_lock);
 	return (tstamp);
 }
 

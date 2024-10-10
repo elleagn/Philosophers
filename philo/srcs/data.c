@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:51:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/04 09:27:43 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 14:28:06 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_data	*init_data(void)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	if (gettimeofday(&data->start_time, NULL))
+		return (NULL);
 	data->print_lock = init_mutex();
 	if (!data->print_lock)
 		return (free(data), NULL);
@@ -30,8 +32,8 @@ t_data	*init_data(void)
 	data->time_to_eat = -1;
 	data->time_to_sleep = -1;
 	data->number_of_meals = -1;
-	data->start_time.tv_sec = 0;
-	data->start_time.tv_usec = 0;
+	data->monitor_id = 0;
+	data->has_died = 0;
 	return (data);
 }
 

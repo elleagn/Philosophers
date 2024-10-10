@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/09 10:04:19 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 13:49:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	print_action(int philo_nb, t_data *data, int action, int timestamp)
 {
 	pthread_mutex_t	*print_lock;
 
-	(void)data;
 	print_lock = data->print_lock;
 	if (action != DIE && has_someone_died(data))
 		return (1);

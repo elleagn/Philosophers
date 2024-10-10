@@ -6,30 +6,59 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/10 10:00:43 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 14:33:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
 // ACTUAL MAIN
-int	main(int argc, char **argv)
+// int	prog(int argc, char **argv)
+// {
+// 	t_args	args;
+
+// 	if (argc != 5 && argc != 6)
+// 		return (usage(), 1);
+// 	args.data = parsing(argv);
+// 	if (!args.data)
+// 		return (1);
+// 	args.philos = create_philosophers(args.data);
+// 	if (gettimeofday(&args.data->start_time, NULL))
+// 		return (full_cleanup(&args.data, args.philos), 1);
+// 	if (create_threads(args))
+// 		return (full_cleanup(&args.data, args.philos), 1);
+// 	wait_threads(args.philos, args.data);
+// 	full_cleanup(&args.data, args.philos);
+// 	return (0);
+// }
+
+int	prog(int argc, char **argv)
 {
-	t_data	*data;
-	void	*value;
+	t_args	*args;
 
 	if (argc != 5 && argc != 6)
 		return (usage(), 1);
-	data = parsing(argv);
-	if (!data)
+	args = malloc(sizeof(t_args));
+	if (!args)
 		return (1);
-	data->philos = create_philosophers(data);
-	if (gettimeofday(&data->start_time, NULL))
-		return (full_cleanup(&data, data->philos), 1);
-	if (create_threads(data))
-		return (full_cleanup(&data, data->philos), 1);
-	wait_threads(data->nphilo, data->philos, data);
-	full_cleanup(&data, data->philos);
+	args->data = parsing(argv);
+	if (!args->data)
+		return (free(args), 1);
+	args->philos = create_philosophers(args->data);
+	if (create_threads(args))
+		return (full_cleanup(&args->data, args->philos), free(args), 1);
+	wait_threads(args->philos, args->data);
+	full_cleanup(&args->data, args->philos);
+	free(args);
+	return (0);
+}
+
+int	main(void)
+{
+	char	*argv[] = {"blbl", "3", "1500", "60", "60", NULL};
+	int		argc = 5;
+
+	prog(argc, argv);
 	return (0);
 }
 

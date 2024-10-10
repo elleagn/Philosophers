@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:21:40 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/09 14:39:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 14:28:42 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ void	announce_death(int nphilo, t_data *data, long time_of_death)
 	print_action(nphilo, data, DIE, time_of_death);
 }
 
-void	*monitor(void *args)
+void	*monitor(void *args_void)
 {
-	t_data	*data;
+	t_args	*args;
 	int		i;
 	long	time_of_death;
 
-	data = (t_data *)args;
+	args = (t_args *)args_void;
+	i = 0;
 	while (1)
 	{
-		i = (i + 1) % data->nphilo;
-		if (is_dead(data->philos[i], data))
+		i = (i + 1) % args->data->nphilo;
+		if (is_dead(args->philos[i], args->data))
 		{
-			time_of_death = time_since(data->start_time);
-			announce_death(i + 1, data, time_of_death);
+			time_of_death = time_since(args->data->start_time);
+			announce_death(i + 1, args->data, time_of_death);
 			break ;
 		}
 	}
