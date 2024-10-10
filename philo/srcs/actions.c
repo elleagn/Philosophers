@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/09 10:18:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/09 11:32:47 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	eat(t_philo *philo, t_data *data)
 	return (0);
 }
 
-int	sleep(int nphilo, t_data *data)
+int	philosleep(int nphilo, t_data *data)
 {
 	long	tstamp;
 

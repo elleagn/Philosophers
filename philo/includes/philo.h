@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/09 10:16:43 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 09:43:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_data
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*death_lock;
 	int				has_died;
+	t_philo			**philos;
+	pthread_t		monitor_id;
 }	t_data;
 
 typedef struct s_philo
@@ -74,9 +76,22 @@ int				has_someone_died(t_data *data);
 long			time_since(struct timeval time);
 int				msleep(int time, t_data *data);
 
-// Eating
+// Actions
 
 void			put_forks_down(t_philo	*philo);
 int				take_forks(t_philo *philo, t_data *data);
+int				think(int nphilo, t_data *data);
+int				philosleep(int nphilo, t_data *data);
+int				eat(t_philo *philo, t_data *data);
+
+// Routines
+
+void			*philosopher_life(void *arg);
+void			*monitor(void *args);
+
+// Threads
+
+int				create_threads(t_data *data);
+void			wait_threads(int n, t_philo **philos, t_data *data);
 
 #endif

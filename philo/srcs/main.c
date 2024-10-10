@@ -6,50 +6,30 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/08 11:44:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 10:00:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	*take_and_put_forks_down(void *philosopher)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)philosopher;
-	if (!take_forks(philo, philo->data))
-		put_forks_down(philo);
-	return (NULL);
-}
-
 // ACTUAL MAIN
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	*data;
-	t_philo	**philos;
-	int		i;
 	void	*value;
 
-	i = 0;
-	// if (argc != 5 && argc != 6)
-	// 	return (usage(), 1);
-	data = init_data();
+	if (argc != 5 && argc != 6)
+		return (usage(), 1);
+	data = parsing(argv);
 	if (!data)
 		return (1);
-	data->nphilo = 2;
-	philos = create_philosophers(data);
+	data->philos = create_philosophers(data);
 	if (gettimeofday(&data->start_time, NULL))
-		return (full_cleanup(&data, philos), 1);
-	while (i < data->nphilo)
-	{
-		if (pthread_create(&philos[i]->thread_id, NULL, take_and_put_forks_down,
-				(void *)philos[i]))
-			break ;
-		i++;
-	}
-	while (i-- > 0)
-		pthread_join(philos[i]->thread_id, &value);
-	full_cleanup(&data, philos);
+		return (full_cleanup(&data, data->philos), 1);
+	if (create_threads(data))
+		return (full_cleanup(&data, data->philos), 1);
+	wait_threads(data->nphilo, data->philos, data);
+	full_cleanup(&data, data->philos);
 	return (0);
 }
 
