@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/10 14:33:29 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/10 14:44:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	prog(int argc, char **argv)
 
 int	main(void)
 {
-	char	*argv[] = {"blbl", "3", "1500", "60", "60", NULL};
+	char	*argv[] = {"blbl", "1", "1500", "60", "60", NULL};
 	int		argc = 5;
 
 	prog(argc, argv);

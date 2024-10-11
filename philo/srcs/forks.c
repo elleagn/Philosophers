@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:45:53 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/10 13:45:59 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/11 08:29:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	choose_fork_order(pthread_mutex_t **fork1, pthread_mutex_t **fork2,
 t_philo *philo)
 {
-	if (philo->num / 2)
+	if (philo->num % 2)
 	{
 		*fork1 = philo->right_fork;
 		*fork2 = philo->left_fork;
@@ -40,6 +40,9 @@ int	take_forks(t_philo *philo, t_data *data)
 	if (tstamp < 0 || has_someone_died(data)
 		|| print_action(philo->num, data, TAKE_FORK, tstamp))
 		return (pthread_mutex_unlock(fork1), -1);
+	if (!fork2)
+		return (pthread_mutex_unlock(fork1),
+			msleep(data->time_to_die, data), 1);
 	if (pthread_mutex_lock(fork2))
 		return (printf("Error locking mutex\n"),
 			pthread_mutex_unlock(fork1), -1);
