@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:21:40 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 08:38:35 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:18:12 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,18 @@ int	is_dead(t_philo *philo, t_data *data)
 	return (0);
 }
 
-void	announce_death(int nphilo, t_data *data, long time_of_death)
+void	announce_death(int nphilo, t_data *data)
 {
 	pthread_mutex_lock(data->death_lock);
 	data->has_died = 1;
 	pthread_mutex_unlock(data->death_lock);
-	print_action(nphilo, data, DIE, time_of_death);
+	print_action(nphilo, data, DIE);
 }
 
 void	*monitor(void *args_void)
 {
 	t_args	*args;
 	int		i;
-	long	time_of_death;
 
 	args = (t_args *)args_void;
 	i = 0;
@@ -64,11 +63,7 @@ void	*monitor(void *args_void)
 	{
 		i = (i + 1) % args->data->nphilo;
 		if (is_dead(args->philos[i], args->data))
-		{
-			time_of_death = time_since(args->data->start_time);
-			announce_death(i + 1, args->data, time_of_death);
-			break ;
-		}
+			announce_death(i + 1, args->data);
 	}
 	return (NULL);
 }
