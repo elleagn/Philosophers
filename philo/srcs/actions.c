@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:19:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:32:31 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	eat(t_philo *philo, t_data *data)
 	if (update_mealtime(philo))
 		return (1);
 	tstamp = print_action(philo->num, data, EAT);
-	if (tstamp < 0 || msleep(data->time_to_eat, data))
+	if (tstamp < 0 || msleep(data->time_to_eat, data, tstamp))
 		return (put_forks_down(philo), 1);
 	put_forks_down(philo);
 	return (0);
@@ -44,7 +44,7 @@ int	philosleep(int nphilo, t_data *data)
 	tstamp = print_action(nphilo, data, SLEEP);
 	if (tstamp < 0)
 		return (1);
-	if (msleep(data->time_to_sleep, data))
+	if (msleep(data->time_to_sleep, data, tstamp))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:03:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:30:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ void	full_cleanup(t_data	**data, t_philo **philos)
 	clear_data(data);
 }
 
-int	msleep(int time, t_data *data)
+int	msleep(int time, t_data *data, long start)
 {
-	int	i;
+	long	timestamp;
 
-	i = 0;
-	while (i < time)
+	timestamp = start;
+	while (timestamp - start < time)
 	{
 		if (usleep(1000))
 			return (1);
-		if (has_someone_died(data))
+		timestamp = time_since(data->start_time);
+		if (has_someone_died(data) || timestamp < 0)
 			return (1);
-		i++;
 	}
 	return (0);
 }

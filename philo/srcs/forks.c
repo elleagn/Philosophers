@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:45:53 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:20:44 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:31:57 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	take_forks(t_philo *philo, t_data *data)
 		return (pthread_mutex_unlock(fork1), -1);
 	if (!fork2)
 		return (pthread_mutex_unlock(fork1),
-			msleep(data->time_to_die, data), 1);
+			msleep(data->time_to_die + 10, data, 0), 1);
 	if (pthread_mutex_lock(fork2))
 		return (printf("Error locking mutex\n"),
 			pthread_mutex_unlock(fork1), -1);
