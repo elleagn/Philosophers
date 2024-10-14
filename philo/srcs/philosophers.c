@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 09:18:02 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/07 09:12:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/11 11:42:16 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_philo	*init_philo(t_data *data, int nb)
 	philo->num = nb;
 	philo->thread_id = 0;
 	philo->start_of_latest_meal = data->start_time;
+	philo->meals_left = data->number_of_meals;
 	philo->left_fork = NULL;
 	philo->right_fork = init_mutex();
 	if (!philo->right_fork)

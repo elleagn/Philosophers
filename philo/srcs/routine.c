@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:21:40 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/10 14:28:42 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 08:38:35 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*monitor(void *args_void)
 
 	args = (t_args *)args_void;
 	i = 0;
-	while (1)
+	while (1 && !has_someone_died(args->data))
 	{
 		i = (i + 1) % args->data->nphilo;
 		if (is_dead(args->philos[i], args->data))
