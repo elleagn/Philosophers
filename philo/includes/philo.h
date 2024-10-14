@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:29:35 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:46:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_data
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*death_lock;
 	int				has_died;
-	pthread_t		monitor_id;
 }	t_data;
 
 typedef struct s_philo
@@ -93,7 +92,7 @@ int				eat(t_philo *philo, t_data *data);
 // Routines
 
 void			*philosopher_life(void *arg);
-void			*monitor(void *args);
+void			monitor(t_args *args);
 
 // Threads
 

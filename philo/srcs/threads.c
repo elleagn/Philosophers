@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:57:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/10 11:46:05 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:45:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	create_threads(t_args *args)
 		}
 		i++;
 	}
-	if (pthread_create(&args->data->monitor_id, NULL, monitor, (void *)args))
-		return (wait_threads(philos, args->data), 1);
 	return (0);
 }
 
@@ -48,6 +46,4 @@ void	wait_threads(t_philo **philos, t_data *data)
 		pthread_join(philos[i]->thread_id, &val_ptr);
 		i++;
 	}
-	if (data->monitor_id)
-		pthread_join(data->monitor_id, &val_ptr);
 }

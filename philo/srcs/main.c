@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/11 11:44:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:46:11 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	prog(int argc, char **argv)
 	args->philos = create_philosophers(args->data);
 	if (create_threads(args))
 		return (full_cleanup(&args->data, args->philos), free(args), 1);
+	monitor((void *)args);
 	wait_threads(args->philos, args->data);
 	full_cleanup(&args->data, args->philos);
 	free(args);
