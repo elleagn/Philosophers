@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 08:17:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:46:47 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	has_someone_died(t_data *data)
 	int	res;
 
 	if (pthread_mutex_lock(data->death_lock))
-		return (order_exit(data), 1);
+		return (order_exit(data, 1), 1);
 	if (data->has_died)
 		res = 1;
 	else
@@ -35,10 +35,10 @@ long	print_action(int philo_nb, t_data *data, int action)
 	if (action != DIE && has_someone_died(data))
 		return (-1);
 	if (pthread_mutex_lock(print_lock))
-		return (order_exit(data), -1);
+		return (order_exit(data, 1), -1);
 	timestamp = time_since(data->start_time);
 	if (timestamp < 0)
-		return (order_exit(data), -1);
+		return (order_exit(data, 2), -1);
 	if (action == TAKE_FORK)
 		printf("%li %i has taken a fork\n", timestamp, philo_nb);
 	else if (action == EAT)
@@ -79,10 +79,10 @@ int	msleep(int time, t_data *data, long start)
 	while (timestamp - start < time)
 	{
 		if (usleep(1000))
-			return (order_exit(data), 1);
+			return (order_exit(data, 3), 1);
 		timestamp = time_since(data->start_time);
 		if (timestamp < 0)
-			return (order_exit(data), 1);
+			return (order_exit(data, 2), 1);
 		if (has_someone_died(data))
 			return (1);
 	}

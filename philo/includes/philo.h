@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 14:29:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:59:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_philo
 	int				num;
 	pthread_t		thread_id;
 	struct timeval	start_of_latest_meal;
-	int				meals_left;
+	int				meals_eaten;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*mealtime_lock;
+	pthread_mutex_t	*meal_lock;
 	t_data			*data;
 }	t_philo;
 
@@ -80,7 +80,7 @@ long			print_action(int philo, t_data *data, int action);
 int				has_someone_died(t_data *data);
 long			time_since(struct timeval time);
 int				msleep(int time, t_data *data, long start);
-void			order_exit(t_data *data);
+void			order_exit(t_data *data, int error);
 
 // Actions
 

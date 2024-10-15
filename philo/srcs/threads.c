@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:57:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:45:21 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:52:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	create_threads(t_args *args)
 			pthread_mutex_lock(args->data->death_lock);
 			args->data->has_died = 1;
 			pthread_mutex_unlock(args->data->death_lock);
+			write(2, "Error creating thread.\n", 24);
 			wait_threads(philos, args->data);
 			return (1);
 		}

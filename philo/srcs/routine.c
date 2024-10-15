@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:21:40 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 08:13:12 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:58:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	is_dead(t_philo *philo, t_data *data)
 {
 	long	time;
 
-	if (pthread_mutex_lock(philo->mealtime_lock))
+	if (pthread_mutex_lock(philo->meal_lock))
 		return (order_exit(data), -1);
 	time = time_since(philo->start_of_latest_meal);
-	pthread_mutex_unlock(philo->mealtime_lock);
+	pthread_mutex_unlock(philo->meal_lock);
 	if (time < 0)
 		return (-1);
 	if (time > data->time_to_die)

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:51:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:44:41 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:43:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_data	*init_data(void)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (NULL);
+		return (write(2, "Error allocating memory.\n", 26), NULL);
 	if (gettimeofday(&data->start_time, NULL))
-		return (NULL);
+		return (write(2, "Error getting time of day.\n", 28), NULL);
 	data->print_lock = init_mutex();
 	if (!data->print_lock)
 		return (free(data), NULL);
