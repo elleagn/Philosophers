@@ -6,7 +6,7 @@
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 13:33:00 by gozon             #+#    #+#              #
-#    Updated: 2024/10/15 08:24:00 by gozon            ###   ########.fr        #
+#    Updated: 2024/10/15 10:01:59 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR = srcs
 SRC_FILES =	mutexes.c parsing.c data.c philosophers.c main.c utils.c actions.c \
-			forks.c routine.c threads.c utils2.c
+			forks.c routine.c threads.c utils2.c monitor.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR = objects
 SRC_DIR = srcs
