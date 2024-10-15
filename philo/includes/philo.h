@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:38:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:46:50 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/14 14:29:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ long			print_action(int philo, t_data *data, int action);
 int				has_someone_died(t_data *data);
 long			time_since(struct timeval time);
 int				msleep(int time, t_data *data, long start);
+void			order_exit(t_data *data);
 
 // Actions
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/14 11:32:31 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 08:21:06 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 long	update_mealtime(t_philo *philo)
 {
 	if (pthread_mutex_lock(philo->mealtime_lock))
-		return (-1);
+		return (order_exit(philo->data), -1);
 	if (gettimeofday(&philo->start_of_latest_meal, NULL))
-		return (pthread_mutex_unlock(philo->mealtime_lock), -1);
+		return (pthread_mutex_unlock(philo->mealtime_lock),
+			order_exit(philo->data), -1);
 	pthread_mutex_unlock(philo->mealtime_lock);
 	return (0);
 }
@@ -31,7 +32,9 @@ int	eat(t_philo *philo, t_data *data)
 	if (update_mealtime(philo))
 		return (1);
 	tstamp = print_action(philo->num, data, EAT);
-	if (tstamp < 0 || msleep(data->time_to_eat, data, tstamp))
+	if (tstamp < 0)
+		return (order_exit(data), 1);
+	if (msleep(data->time_to_eat, data, tstamp))
 		return (put_forks_down(philo), 1);
 	put_forks_down(philo);
 	return (0);
@@ -43,7 +46,7 @@ int	philosleep(int nphilo, t_data *data)
 
 	tstamp = print_action(nphilo, data, SLEEP);
 	if (tstamp < 0)
-		return (1);
+		return (order_exit(data), 1);
 	if (msleep(data->time_to_sleep, data, tstamp))
 		return (1);
 	return (0);
