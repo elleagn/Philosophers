@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:47:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 09:40:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 10:58:38 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 // 	return (0);
 // }
 
-int	prog(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_args	*args;
 
@@ -42,7 +42,6 @@ int	prog(int argc, char **argv)
 	if (!args)
 		return (1);
 	args->data = parsing(argv);
-	printf("%i \n", args->data->number_of_meals);
 	if (!args->data)
 		return (free(args), 1);
 	args->philos = create_philosophers(args->data);
@@ -52,15 +51,6 @@ int	prog(int argc, char **argv)
 	wait_threads(args->philos, args->data);
 	full_cleanup(&args->data, args->philos);
 	free(args);
-	return (0);
-}
-
-int	main(void)
-{
-	char	*argv[] = {"blbl", "6", "410", "200", "200", "10", NULL};
-	int		argc = 5;
-
-	prog(argc, argv);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:07:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/11 11:44:01 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/16 09:09:25 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ t_data	*parsing(char **argv)
 		return (NULL);
 	if (convert_args(data, argv))
 		return (clear_data(&data), NULL);
+	if (data->nphilo % 2 && data->time_to_eat >= data->time_to_sleep)
+		data->time_to_think = 2 * data->time_to_eat - data->time_to_sleep;
 	return (data);
 }

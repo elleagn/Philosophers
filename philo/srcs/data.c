@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:51:46 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 08:43:59 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/16 09:04:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_data	*init_data(void)
 	data->nphilo = -1;
 	data->time_to_die = -1;
 	data->time_to_eat = -1;
+	data->time_to_think = 0;
 	data->time_to_sleep = -1;
 	data->number_of_meals = -1;
 	data->has_died = 0;

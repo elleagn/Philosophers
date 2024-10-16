@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 09:51:28 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 10:01:46 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/15 11:28:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	monitor(t_args *args)
 	{
 		if (monitor_death(args))
 			break ;
-		if (monitor_meal_number(args))
+		if (args->data->number_of_meals >= 0 && monitor_meal_number(args))
 			break ;
+		if (usleep(1000))
+			order_exit(args->data, 3);
 	}
 }
