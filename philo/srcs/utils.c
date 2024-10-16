@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:42:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 09:46:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/16 12:45:43 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	msleep(int time, t_data *data, long start)
 	timestamp = start;
 	while (timestamp - start < time)
 	{
-		if (usleep(1000))
+		if (usleep(500))
 			return (order_exit(data, 3), 1);
 		timestamp = time_since(data->start_time);
 		if (timestamp < 0)

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:11:56 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 10:20:25 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/16 10:09:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ int	philosleep(int nphilo, t_data *data)
 
 int	think(int nphilo, t_data *data)
 {
-	if (print_action(nphilo, data, THINK) < 0)
+	long	tstamp;
+
+	tstamp = print_action(nphilo, data, THINK);
+	if (tstamp < 0)
+		return (1);
+	if (data->time_to_think && msleep(data->time_to_think, data, tstamp))
 		return (1);
 	return (0);
 }
