@@ -6,11 +6,55 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:57:15 by gozon             #+#    #+#             */
-/*   Updated: 2024/10/15 08:52:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/10/16 12:58:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+pthread_mutex_t	*init_mutex(void)
+{
+	pthread_mutex_t	*mutex;
+
+	mutex = malloc(sizeof(pthread_mutex_t));
+	if (!mutex)
+		return (write(2, "Error allocating memory.\n", 26), NULL);
+	if (pthread_mutex_init(mutex, NULL))
+		return (free(mutex), write(2, "Error initializing mutex.\n", 27), NULL);
+	return (mutex);
+}
+
+void	destroy_mutex(pthread_mutex_t **mutex)
+{
+	if (pthread_mutex_destroy(*mutex))
+		write(2, "Error destroying mutex.\n", 25);
+	free(*mutex);
+	*mutex = NULL;
+}
+
+void	*philosopher_life(void *arg)
+{
+	t_philo	*philo;
+	t_data	*data;
+
+	philo = (t_philo *)arg;
+	data = philo->data;
+	if (philo->num % 2 == 0)
+	{
+		if (msleep(1, data, 0))
+			return (NULL);
+	}
+	while (1)
+	{
+		if (eat(philo, data))
+			break ;
+		if (philosleep(philo->num, data))
+			break ;
+		if (think(philo->num, data))
+			break ;
+	}
+	return (NULL);
+}
 
 int	create_threads(t_args *args)
 {
